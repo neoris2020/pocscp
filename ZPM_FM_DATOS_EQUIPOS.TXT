@@ -1,0 +1,57 @@
+FUNCTION zpm_fm_datos_equipos.
+*"----------------------------------------------------------------------
+*"*"Interfase local
+*"  IMPORTING
+*"     VALUE(IV_EQUNR) TYPE  EQUNR
+*"  EXPORTING
+*"     VALUE(ES_DATOS) TYPE  ZPMS_DATOS_EQUIPO
+*"     VALUE(ET_UBICACIONES) TYPE  ZPMTT_DATOS_UBICACIONES
+*"     VALUE(ET_HISTORICOS) TYPE  ZPMTT_DATOS_HISTORICOS
+*"     VALUE(ET_PENDIENTES) TYPE  ZPMTT_DATOS_PENDIENTES
+*"----------------------------------------------------------------------
+
+  "obtiene datos del equipo
+  SELECT SINGLE eq~equnr
+                eq~invnr
+                eq~answt
+                eq~waers
+                eq~herst
+                eq~serge
+                et~eqktx
+                eq~objnr
+           INTO es_datos
+           FROM equi AS eq
+          INNER JOIN eqkt AS et
+             ON et~equnr EQ eq~equnr
+          WHERE eq~equnr EQ iv_equnr
+            AND et~spras EQ 'S'.
+
+  "Si encontró datos del equipo
+  IF sy-subrc IS INITIAL.
+
+    "Obtiene Ubicaciones técnias
+    SELECT tplnr
+           tplma
+      INTO TABLE et_ubicaciones
+      FROM itob
+     WHERE equnr EQ es_datos-equnr.
+
+    "Obtiene historicos de las ordenes de mantenimientos
+    SELECT aufnr
+      INTO TABLE et_historicos
+      FROM afih
+     WHERE iphas IN ('3','5','6')
+       AND equnr EQ es_datos-equnr.
+
+    SELECT qmnum
+           erdat
+           priok
+           ltrmn
+      INTO TABLE et_pendientes
+      FROM viqmel
+     WHERE equnr EQ es_datos-equnr
+       AND aufnr EQ space.
+
+  ENDIF.
+
+ENDFUNCTION.
