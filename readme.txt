@@ -8,7 +8,7 @@ Ingresar a la aplicacion, introduciendo en el browser, el siguiente URL:
 Cuando pida usuario y clave, ingresar los siguientes datos
 
 		Usuario: equipos.neoris@gmail.com
-		Pass: Neoris.2020
+		Pass: Prueba2020
 
 
 La primera pantalla que veran es un launchpad. Es el estandard de SAP para alojar las aplicaciones. Dentro de esta pagina, 
@@ -20,7 +20,7 @@ presiona el link "Buscar". De esta forma se actualiza los tabs a la izquierda.
 Apk disponible para descargar en: https://mobile-ndd1c9526.dispatcher.br1.hana.ondemand.com/mobileservices/origin/hcpms/CBMS/cloudbuild/ota/html?MobileApplicationID=b79a65e8-02ae-4699-989e-b4507dd581a2 
 
 Usuario: equipos.neoris@gmail.com
-Pass: Neoris.2020
+Pass: Prueba2020
 
 
 Github:  https://github.com/neoris2020/pocscp?
