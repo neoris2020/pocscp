@@ -1,0 +1,22 @@
+FUNCTION zpm_fm_listado_equipos.
+*"----------------------------------------------------------------------
+*"*"Interfase local
+*"  IMPORTING
+*"     VALUE(IV_FILTRO) TYPE  CHAR40 OPTIONAL
+*"  EXPORTING
+*"     VALUE(ET_EQUIPOS) TYPE  ZPMTT_LISTADO_EQUIPOS
+*"----------------------------------------------------------------------
+
+  DATA: lv_filtro TYPE string.
+
+  CONCATENATE '%' iv_filtro '%' INTO lv_filtro.
+
+  SELECT equnr
+         eqktx
+    INTO TABLE et_equipos
+    FROM eqkt
+   WHERE ( equnr LIKE lv_filtro
+      OR   eqktx LIKE lv_filtro )
+     AND spras EQ 'S'.
+
+ENDFUNCTION.
